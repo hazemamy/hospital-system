@@ -2,12 +2,12 @@
 #include <string>
 using namespace std;
 
-const int MAX_SPACIALZATION = 20;
+const int MAX_SPECIALIZATION = 20;
 const int MAX_QUEUE = 5;
 
-string names_list[MAX_SPACIALZATION + 1][MAX_QUEUE];
-int status_list[MAX_SPACIALZATION + 1][MAX_QUEUE];
-int queue_length[MAX_SPACIALZATION + 1];
+string names_list[MAX_SPECIALIZATION + 1][MAX_QUEUE];
+int status_list[MAX_SPECIALIZATION + 1][MAX_QUEUE];
+int queue_length[MAX_SPECIALIZATION + 1];
 
 int manu()
 {
@@ -89,6 +89,34 @@ bool add_patient()
     return true;
 }
 
+void print_patient(int spec, string names_sp[], int status_sp[])
+{
+    int len = queue_length[spec];
+    if (len == 0)
+        return;
+
+    cout << "There are " << len << " patients in specialization " << spec << "\n";
+    for (int i = 0; i < len; ++i)
+    {
+        cout << names_sp[i] << " ";
+        if (status_sp[i])
+            cout << "urgent\n";
+        else
+            cout << "regular\n";
+    }
+    cout << "\n";
+}
+
+void print_all_patients() {
+	cout << "-------------------------------\n";
+	for (int spec = 0; spec < MAX_SPECIALIZATION; ++spec) {
+		print_patient(spec, names_list[spec], status_list[spec]);
+	}
+}
+
+
+
 int main()
 {
+    
 }
