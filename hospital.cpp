@@ -9,21 +9,18 @@ string names_list[MAX_SPECIALIZATION + 1][MAX_QUEUE];
 int status_list[MAX_SPECIALIZATION + 1][MAX_QUEUE];
 int queue_length[MAX_SPECIALIZATION + 1];
 
-int manu()
+int menu()
 {
 
     int choice = -1;
-    while (choice = -1)
+    while (choice == -1)
     {
-        cout << "\n----------------------------" << endl;
-        cout << "1. Add new patieant" << endl;
-        cout << "2. Get the next patient" << endl;
-        cout << "3. Display all patients" << endl;
+        cout << "\n1. Add new patieant" << endl;
+        cout << "2. Display all patients" << endl;
+        cout << "3. Get the next patient" << endl;
         cout << "4. Exit" << endl;
-        cout << "----------------------------" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
-        // cout << "----------------------------"<<endl;
 
         if (choice <= 0 && choice > 4)
         {
@@ -62,7 +59,7 @@ bool add_patient()
     string name;
     int st;
 
-    cout << "Enter specialization, name, statis: ";
+    cout << "\nEnter specialization, name, statis: ";
     cin >> spec >> name >> st;
 
     int pos = queue_length[spec];
@@ -107,16 +104,61 @@ void print_patient(int spec, string names_sp[], int status_sp[])
     cout << "\n";
 }
 
-void print_all_patients() {
-	cout << "-------------------------------\n";
-	for (int spec = 0; spec < MAX_SPECIALIZATION; ++spec) {
-		print_patient(spec, names_list[spec], status_list[spec]);
-	}
+void print_all_patients()
+{
+    for (int spec = 0; spec < MAX_SPECIALIZATION; ++spec)
+    {
+        print_patient(spec, names_list[spec], status_list[spec]);
+    }
 }
 
+void get_next_patients()
+{
+    int spec;
+    cout << "\nEnter specialization: ";
+    cin >> spec;
 
+    int len = queue_length[spec];
+
+    if (len == 0)
+    {
+        cout << "No patients at the moment. Have rest, Dr\n";
+        return;
+    }
+
+    cout << names_list[spec][0] << " please go with the Dr\n";
+
+    shift_left(spec, names_list[spec], status_list[spec]);
+}
+
+void hospital_system()
+{
+    while (true)
+    {
+        int choice = menu();
+
+        if (choice == 1)
+        {
+            add_patient();
+            cout << "*****************************************" << endl;
+        }
+        else if (choice == 2)
+        {
+            print_all_patients();
+            cout << "*****************************************" << endl;
+        }
+        else if (choice == 3)
+        {
+            get_next_patients();
+            cout << "*****************************************" << endl;
+        }
+        else
+            break;
+    }
+}
 
 int main()
 {
-    
+    hospital_system();
+    return 0;
 }
