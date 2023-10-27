@@ -15,12 +15,13 @@ int menu()
     int choice = -1;
     while (choice == -1)
     {
-        cout << "\n1. Add new patieant" << endl;
+        cout << "\n\n1. Add new patieant" << endl;
         cout << "2. Display all patients" << endl;
         cout << "3. Get the next patient" << endl;
         cout << "4. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
+        cout << endl;
 
         if (choice <= 0 && choice > 4)
         {
@@ -59,8 +60,12 @@ bool add_patient()
     string name;
     int st;
 
-    cout << "\nEnter specialization, name, statis: ";
-    cin >> spec >> name >> st;
+    cout << "Enter name: ";
+    cin >> name;
+    cout << "Enter specialization: ";
+    cin >> spec;
+    cout << "Enter statis 1 if urgent 0 if not: ";
+    cin >> st;
 
     int pos = queue_length[spec];
     if (pos >= MAX_QUEUE)
@@ -140,17 +145,14 @@ void hospital_system()
         if (choice == 1)
         {
             add_patient();
-            cout << "*****************************************" << endl;
         }
         else if (choice == 2)
         {
             print_all_patients();
-            cout << "*****************************************" << endl;
         }
         else if (choice == 3)
         {
             get_next_patients();
-            cout << "*****************************************" << endl;
         }
         else
             break;
